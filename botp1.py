@@ -15,9 +15,9 @@ else:
 #initialize praw
 reddit = praw.Reddit('bot1')
 
-subreddit = reddit.subreddit("hongkongregion")
+subreddit = reddit.subreddit("canucks")
 
-for comment in  subreddit.comments(limit=10):
+for comment in  subreddit.comments(limit=20):
 	print("Author: ", comment.author)
 	print("Created: ", comment.created_utc)
 	print("Body: ", comment.body)
