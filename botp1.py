@@ -22,13 +22,12 @@ for comment in  subreddit.comments(limit=20):
 	print("Created: ", comment.created_utc)
 	print("Body: ", comment.body)
         #check if comment is in comhist list
-        if comment.id not in comhist:
+        if comment.id not in comhist and comment.author.name != 'TemporaryPromise9':
             if re.search("messier", comment.body, re.IGNORECASE):
                 newcomment = comment.reply("FUCK MESSIER!")
                 print("********* Bot replied **********")
                 #Add new comment and commented comment ids into list
                 comhist.append(comment.id)
-                comhist.append(newcomment.id)
         #write updated list back to file
         with open("comhist.txt", "w") as f:
             for comment_id in comhist:
