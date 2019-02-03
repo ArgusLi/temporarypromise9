@@ -1,13 +1,36 @@
 import praw
+import pdb
+import re
+import os
 
+#Open and load comhist as list of comments commented on before
+if not os.path.isfile("comhist.txt"):
+    comhist = []
+else:
+    with open("comhist.txt", "r") as f:
+        comhist = f.read()
+        comhist = comhist.split("\n")
+        comhist = list(filter(None, comhist))
+
+#initialize praw
 reddit = praw.Reddit('bot1')
 
-subreddit = reddit.subreddit("canucks")
+subreddit = reddit.subreddit("hongkongregion")
 
 for comment in  subreddit.comments(limit=10):
 	print("Author: ", comment.author)
 	print("Created: ", comment.created_utc)
 	print("Body: ", comment.body)
-	#if submission.num_comments>0:
-	#	print (">0 Comments")
-	print("-------------------------\n")
+        #check if comment is in comhist list
+        if comment.id not in comhist:
+            if re.search("messier", comment.body, re.IGNORECASE):
+                newcomment = comment.reply("FUCK MESSIER!")
+                print("********* Bot replied **********")
+                #Add new comment and commented comment ids into list
+                comhist.append(comment.id)
+                comhist.append(newcomment.id)
+        #write updated list back to file
+        with open("comhist.txt", "w") as f:
+            for comment_id in comhist:
+                f.write(comment_id + "\n")
+        print("-------------------------\n")
