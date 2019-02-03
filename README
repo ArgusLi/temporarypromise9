@@ -1,4 +1,11 @@
-Simple script inspired by Shantnu's Redditbot (https://github.com/shantnu/RedditBot/")
+Reddit bot inspired by Shantnu's Redditbot (https://github.com/shantnu/RedditBot/")
+
+Contains 2 scripts - botp1.py and newscollection.py
+
+botp1.py:
 This script when run, scans the 20 newest comments on r/canucks
 If the word "messier" is found, the script replies to that comment with "FUCK MESSIER!"
 The script detects when a comment that contains "messier" has already been replied to, including its own messages
+
+newscollection.py:
+This script when run, crossposts the 3 top submissions in a collection of subreddits to r/newscollection
